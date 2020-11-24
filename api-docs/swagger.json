@@ -1,0 +1,415 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "API para registro e consulta de IMs - Supermercados Brasil",
+    "version": "1.0.1",
+    "title": "API IMs notify",
+    "termsOfService": "",
+    "contact": {
+      "name": "Jhonleandres",
+      "email": "jhonleandres.silva@bretas.com.br"
+    }
+  },
+  "host": "localhost:3333",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Notificações IMs",
+      "description": "Everything about your ims",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/ims": {
+      "get": {
+        "tags": [
+          "im"
+        ],
+        "summary": "get",
+        "description": "Listagem de notificações de IMs.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response body"
+          },
+          "500": {
+            "description": "Server Failure"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "im"
+        ],
+        "summary": "save",
+        "description": "This can only be done by the logged in user.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "idPais",
+            "in": "header",
+            "description": "ID Pais Origem",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "type",
+            "in": "header",
+            "description": "Tipo de registro",
+            "enum": ["OVERVIEW"],
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "in": "header",
+            "description": "Titulo IM",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "ticket",
+            "in": "header",
+            "description": "Numero do ticket IM",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "faultDescription",
+            "in": "header",
+            "description": "Descrição da Falha",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "initialAffectedService",
+            "in": "header",
+            "description": "Serviço Afetado Inicial",
+            "required": false,
+            "type": "string"
+          },          {
+            "name": "initialImpact",
+            "in": "header",
+            "description": "Impacto Inicial",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "timeFaulIdentified",
+            "in": "header",
+            "description": "Hora que se identificou a falha",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "loginCreated",
+            "in": "header",
+            "description": "Login de Rede AD",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful operation"
+          },
+          "204": {
+            "description": "Successful operation"
+          },
+          "500": {
+            "description": "Server Failure"
+          }
+        }
+      }
+    },
+    "/ims/:id": {
+      "get": {
+        "tags": [
+          "im"
+        ],
+        "summary": "getById",
+        "description": "Get IM ID.",
+        "operationId": "getById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID IM",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response body"
+          },
+          "500": {
+            "description": "Server Failure"
+          }
+        }
+      }
+    },
+    "/diagnosis/:id": {
+      "get": {
+        "tags": [
+          "diagnosis"
+        ],
+        "summary": "List IMs",
+        "description": "Listagem de notificações de IMs.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created Registration"
+          },
+          "204": {
+            "description": "Update Registration"
+          },
+          "500": {
+            "description": "Server Failure"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "diagnosis"
+        ],
+        "summary": "Updated user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created Registration"
+          },
+          "204": {
+            "description": "Update Registration"
+          },
+          "500": {
+            "description": "Server Failure"
+          }
+        }
+      }
+    },
+    "/resolution/:id": {
+      "get": {
+        "tags": [
+          "resolution"
+        ],
+        "summary": "List IMs",
+        "description": "Listagem de notificações de IMs.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created Registration"
+          },
+          "204": {
+            "description": "Update Registration"
+          },
+          "500": {
+            "description": "Server Failure"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "resolution"
+        ],
+        "summary": "Create Notify",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created Registration"
+          },
+          "204": {
+            "description": "Update Registration"
+          },
+          "500": {
+            "description": "Server Failure"
+          }
+        }
+      }
+    },
+    "/solved/:id": {
+      "get": {
+        "tags": [
+          "solved"
+        ],
+        "summary": "List IMs",
+        "description": "Listagem de notificações de IMs.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created Registration"
+          },
+          "204": {
+            "description": "Update Registration"
+          },
+          "500": {
+            "description": "Server Failure"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "solved"
+        ],
+        "summary": "Create Notify",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created Registration"
+          },
+          "204": {
+            "description": "Update Registration"
+          },
+          "500": {
+            "description": "Server Failure"
+          }
+        }
+      }
+    }
+    
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
