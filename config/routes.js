@@ -1,21 +1,17 @@
 
 module.exports = app => {
-    app.route('/ims')
-        .post(app.api.ImController.save)
-        .get(app.api.ImController.get)
-    app.route('/ims/:id')
-        .post(app.api.ImController.save)
-        .get(app.api.ImController.getById)
-    app.route('/close')
-        .get(app.api.ImController.getImsClose) 
-    app.route('/close/:id')
-        .get(app.api.ImController.getImsCloseById)     
-    app.route('/folowup')
-        .post(app.api.folowUpController.save)
-    app.route('/folowup/:id/all')
-        .get(app.api.folowUpController.get)
-    app.route('/folowup/:id')
-        .get(app.api.folowUpController.getById)
+    app.post('/signin', app.api.AuthController.signin)
+    app.post('/validateToken', app.api.AuthController.validateToken)
 
+    app.route('/activity')
+        // .all(app.api.passport.authenticate())
+        .post(app.api.ActivityController.save)
+        .get(app.api.ActivityController.get)
+        .get(app.api.ActivityController.getById)
         
+    app.route('/activity/task')
+        // .all(app.api.passport.authenticate())
+        .post(app.api.TaskController.save)
+        .get(app.api.TaskController.get)
+        .get(app.api.TaskController.getById)
 }
