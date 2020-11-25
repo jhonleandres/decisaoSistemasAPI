@@ -3,7 +3,7 @@ const { FsMigrations } = require('knex/lib/migrate/sources/fs-migrations')
 
 module.exports = {
     development: {
-      client: 'mysql2',
+      client: 'pg',
       connection: db,
       pool: {
         min: 2,
@@ -11,14 +11,14 @@ module.exports = {
       },
       migrations: {
         tableName: 'knex_migrations',
-        migrationSource: new FsMigrations('./database/migrations', false)
+        migrationSource: new FsMigrations('./migrations', false)
       },
       seeds: {
-        directory: './database/seeds'
+        directory: './seeds'
       }
     },
     production: {
-      client: 'mysql2',
+      client: 'pg',
       connection: db,
       pool: {
         min: 2,
@@ -26,10 +26,10 @@ module.exports = {
       },
       migrations: {
         tableName: 'knex_migrations',
-        migrationSource: new FsMigrations('./database/migrations', false)
+        migrationSource: new FsMigrations('./migrations', false)
       },
       seeds: {
-        directory: './database/seeds'
+        directory: './seeds'
       }
     }
 };
